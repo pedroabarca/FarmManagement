@@ -1,5 +1,10 @@
 # FarmManagement API
 
+[![Railway Deploy](https://img.shields.io/badge/Railway-Deployed-success?logo=railway&logoColor=white)](https://farm-management-api-production.up.railway.app)
+[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-AWS_RDS-316192?logo=postgresql&logoColor=white)](https://aws.amazon.com/rds/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Backend RESTful API para gestión de datos de granja. Actualmente soporta gestión de animales.
 
 ## 🚀 Estado: PRODUCCIÓN
