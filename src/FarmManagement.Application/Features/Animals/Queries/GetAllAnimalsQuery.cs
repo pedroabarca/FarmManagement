@@ -5,7 +5,10 @@ using FarmManagement.Infrastructure.Persistence;
 
 namespace FarmManagement.Application.Features.Animals.Queries
 {
-    public class GetAllAnimalsQuery : IRequest<List<Animal>> { }
+    public class GetAllAnimalsQuery : IRequest<List<Animal>>
+    {
+        public bool IncludeRelatedData { get; set; } = false;
+    }
 
     public class GetAllAnimalsQueryHandler : IRequestHandler<GetAllAnimalsQuery, List<Animal>>
     {
@@ -18,7 +21,22 @@ namespace FarmManagement.Application.Features.Animals.Queries
 
         public async Task<List<Animal>> Handle(GetAllAnimalsQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Animals.ToListAsync(cancellationToken);
+            var query = _context.Animals.AsQueryable();
+
+            if (request.IncludeRelatedData)
+            {
+                query = query
+                    .Include(a => a.Sire)
+                    .Include(a => a.Dam)
+                    .Include(a => a.WeightRecords)
+                    .Include(a => a.BirthRecordsAsMother)
+                    .Include(a => a.BreedingRecords)
+                    .Include(a => a.HealthRecords);
+            }
+
+            return await query
+                .OrderByDescending(a => a.CreatedAt)
+                .ToListAsync(cancellationToken);
         }
     }
 }
