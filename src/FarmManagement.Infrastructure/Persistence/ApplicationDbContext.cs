@@ -68,10 +68,6 @@ namespace FarmManagement.Infrastructure.Persistence
                     .WithOne(h => h.Animal)
                     .HasForeignKey(h => h.AnimalId)
                     .OnDelete(DeleteBehavior.Cascade);
-
-                // Ignore obsolete properties (they're just aliases)
-                entity.Ignore(a => a.Species);
-                entity.Ignore(a => a.DateOfBirth);
             });
 
             // WeightRecord Entity Configuration
